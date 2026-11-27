@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kakehashi privacy and terms</title>
+<style>
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem; color: #24302c; background: #f4f0e6; font: 16px/1.6 system-ui, sans-serif; }
+a { color: #11606c; }
+</style>
+</head>
+<body>
+<main>
+<h1>Kakehashi privacy and terms</h1>
+<p>Kakehashi is a channel discovery tool. It uses YouTube API Services to search public videos and retrieve channel videos. By using Kakehashi, you agree to the <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a>. Google’s <a href="https://policies.google.com/privacy">Privacy Policy</a> also applies to Google services.</p>
+<h2>Information and storage</h2>
+<p>When using the app-provided key, Kakehashi sends your search terms and requested channel or video identifiers to YouTube through the app’s Cloudflare-hosted service. If you enter your own YouTube API key in Settings, your browser sends it and those search terms or channel identifiers directly to Google; these requests use your Google project’s quota. It displays public results returned by YouTube. Kakehashi does not ask for your YouTube password or connect to your YouTube account.</p>
+<p>Your layout and color choices, ignored and saved curated channels, agreement to this policy, and any YouTube API key you enter are stored in your browser’s local storage. Saved and ignored fresh YouTube search results are held in memory for this browser session and expire within 29 days. Other scripts running on this website could access local storage. Restrict your personal key in Google Cloud to YouTube Data API and this website. Remove the key in Settings when you no longer want it stored. You can remove saved channels in the app or clear Kakehashi’s site data in your browser. Exported CSV files remain wherever you choose to save them.</p>
+<p>To limit abuse, Cloudflare provides the requesting IP address to the service. The service stores a hash of the address and the current minute with a request counter in a Cloudflare database. It periodically deletes old counters. It also stores aggregate API usage by hour or day for shared quota limits. Cloudflare may process request data under its own <a href="https://www.cloudflare.com/privacypolicy/">privacy policy</a>.</p>
+<h2>Other services</h2>
+<p>If you choose optional Instagram and TikTok search, Kakehashi sends your search terms to the site’s configured search services. Instagram search may use Social Fetch, whose <a href="https://socialfetch.dev/privacy">privacy policy</a> applies. Successful Instagram results and a hash of the normalized search term may be stored in Cloudflare and reused for matching searches for six hours. Expired entries are periodically deleted when new results are cached. TikTok search may use Exa; Instagram and TikTok search may use SearXNG and its upstream search engines. Your choice is stored in this browser. Search results may load Instagram or TikTok embeds as you browse.</p>
+<p>YouTube thumbnails can load from YouTube as you browse, before you press play. TikTok videos play through a wrapper page that, unless the site operator changes it, the Kakehashi maintainer hosts at kakehashi-tiktok-player.pages.dev on Cloudflare; it receives your connection and the video or account being shown. A lookup of a video’s channel goes through the app’s service to YouTube, even if you have saved your own YouTube API key.</p>
+<p>If an operator enables Instagram discovery, Kakehashi sends the requested creator handle through its Cloudflare service to Meta to find public videos. Video previews can load as you browse or open a creator's details, before you press play. When a preview loads, you play a video, or you open an account, YouTube, Instagram or TikTok receives your connection and may use cookies or similar technologies, serve content, or show advertisements under its own policies. The optional Kikitori action sends a selected YouTube video URL to Kikitori running on your device.</p>
+<p>You can review Google account permissions at <a href="https://security.google.com/settings/security/permissions">Google security settings</a>.</p>
+</main>
+</body>
+</html>

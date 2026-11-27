@@ -1,0 +1,33 @@
+{
+  "checked": "2026-11-21",
+  "method": "Local whisper.cpp large-v3-turbo, automatic language detection, first 30 seconds; silent playback",
+  "samples": [
+    {
+      "platform": "instagram",
+      "creator": "mmkemio",
+      "url": "https://www.instagram.com/reel/DfJ_Z0aiXJK/",
+      "detected_language": "ja",
+      "confidence": 0.998157,
+      "source_id": "DfJ_Z0aiXJK",
+      "source_channel": "mmkemio",
+      "sample_sha256": "002c8d231a3bac91ed76c4a3102d0f5646d73576769885ea6e5f8ac57a649f6a",
+      "sample_duration_seconds": 30,
+      "source_media_sha256": "5426f806f64d8dbb87380c9bf7a035ac4ad42b5b1e578b04d58ba8fab6945897",
+      "sample_extraction": "first 30 seconds of downloaded Reel; ffmpeg mono 16 kHz WAV; regenerated WAV hash matched"
+    },
+    {
+      "platform": "youtube",
+      "creator": "UCOUu8YlbaPz0W2TyFTZHvjA",
+      "url": "https://www.youtube.com/watch?v=ClZfvQm-_Ec",
+      "detected_language": "ja",
+      "confidence": 0.999334,
+      "source_id": "ClZfvQm-_Ec",
+      "source_channel": "UCOUu8YlbaPz0W2TyFTZHvjA",
+      "sample_sha256": "a7b503a6e3d162c4a7827feb66c2fbc1467ca3b0de0b93db3bd71774162a018f",
+      "sample_duration_seconds": 30,
+      "source_media_sha256": "2d4ea9efbcdbea6e92585ca09dc0c75e8d13e61f438f86bada2d3c0d431c784d",
+      "sample_extraction": "YouTube audio downloaded with yt-dlp --download-sections *0-30; ffmpeg mono 16 kHz WAV; regenerated WAV hash matched"
+    }
+  ],
+  "scope": "One sample per creator; automatic recognition can be wrong and does not verify other videos."
+}

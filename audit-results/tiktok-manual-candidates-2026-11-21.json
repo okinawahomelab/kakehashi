@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-21",
+  "method": "Creator profile embed inspected manually; official oEmbed returned the matching post ID; muted visual playback observed. Spoken-language evidence is recorded per candidate.",
+  "candidates": [
+    {
+      "handle": "makofoods",
+      "url": "https://www.tiktok.com/@makofoods/video/7206682757198515474",
+      "visual_playback": "passed",
+      "spoken_japanese": "local_whisper_confirmed",
+      "notes": "Official player advanced past 11 seconds; process-muted local capture contained speech. Local Whisper large-v3-turbo auto-detected Japanese at 0.982 and transcribed cooking instructions. Transcription can contain errors."
+    },
+    {
+      "handle": "sugaisan",
+      "url": "https://www.tiktok.com/@sugaisan/video/7708208106093677845",
+      "visual_playback": "passed",
+      "spoken_japanese": "local_whisper_confirmed",
+      "notes": "Official player advanced past 11 seconds; process-muted audio capture transcribed locally. Whisper auto-detected Japanese at 0.998 and produced a science explanation."
+    },
+    {
+      "handle": "hondanowing",
+      "url": "https://www.tiktok.com/@hondanowing/video/7420034082651819272",
+      "visual_playback": "passed",
+      "spoken_japanese": "failed",
+      "notes": "Official player completed a 10-second clip; local Whisper detected Korean at 0.651 and returned Korean text. Excluded; try another clip."
+    },
+    {
+      "handle": "hajimehtk",
+      "url": "https://www.tiktok.com/@hajimehtk/video/7213240406979464450",
+      "visual_playback": "unverified",
+      "spoken_japanese": "unverified",
+      "notes": "No video element was observed in the isolated player; try another clip or retry after inspecting the player state."
+    },
+    {
+      "handle": "taisukesan0205",
+      "url": "https://www.tiktok.com/@taisukesan0205/video/7302368412628569345",
+      "visual_playback": "passed",
+      "spoken_japanese": "local_whisper_confirmed",
+      "notes": "Official player advanced past 10 seconds; process-muted audio capture transcribed locally. Whisper detected Japanese at 0.976 and returned speech about sports-game commentary."
+    },
+    {
+      "handle": "marieueda929",
+      "url": "https://www.tiktok.com/@marieueda929/video/7053746511565344002",
+      "visual_playback": "passed",
+      "spoken_japanese": "local_whisper_confirmed",
+      "notes": "Japanese word-meaning lesson; official player advanced past 10 seconds; process-muted local Whisper auto-detected Japanese at 0.997. Creator's Japanese-language focus was described by TikTok Japan: https://note.com/tiktok/n/n885a219942d5"
+    },
+    {
+      "handle": "infoteacherfujiwara",
+      "url": "https://www.tiktok.com/@infoteacherfujiwara/video/7185099733558463745",
+      "visual_playback": "passed",
+      "spoken_japanese": "local_whisper_confirmed",
+      "notes": "Japanese spoken explanation; official player advanced past 11 seconds; process-muted local Whisper auto-detected Japanese at 0.997. Creator's profile describes educational content."
+    },
+    {
+      "handle": "yuriyan.retriever0",
+      "url": "https://www.tiktok.com/@yuriyan.retriever0/video/7697529094711315742",
+      "visual_playback": "passed",
+      "spoken_japanese": "failed",
+      "notes": "Official player advanced past 11 seconds; local Whisper auto-detected English with probability 0.946. Candidate excluded; select a different clip."
+    },
+    {
+      "handle": "yuriyan.retriever0",
+      "url": "https://www.tiktok.com/@yuriyan.retriever0/video/7674891962201263390",
+      "visual_playback": "passed",
+      "spoken_japanese": "uncertain",
+      "notes": "Official player advanced past 11 seconds; Whisper generated Japanese text but auto-detected Korean at 0.998. Needs a better speech sample or independent language confirmation."
+    },
+    {
+      "handle": "yuriyan.retriever0",
+      "url": "https://www.tiktok.com/@yuriyan.retriever0/video/7652759312837643551",
+      "visual_playback": "advanced_to_9.98_seconds",
+      "spoken_japanese": "unverified",
+      "notes": "Short clip paused by the end of capture; Whisper auto-detected English at 0.777 and returned insufficient speech. The capture runner originally treated finished clips as failed; its check was corrected."
+    }
+  ]
+}

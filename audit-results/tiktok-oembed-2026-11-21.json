@@ -1,0 +1,430 @@
+{
+  "checkedAt": "2026-11-21T05:40:33.504Z",
+  "method": "TikTok oEmbed; does not verify playback, language, or suitability",
+  "accounts": [
+    {
+      "handle": "moai_s_kitchen",
+      "url": "https://www.tiktok.com/@moai_s_kitchen/video/7041096289777487106",
+      "status": "oembed_confirmed",
+      "http": 200
+    },
+    {
+      "handle": "kano9x",
+      "url": "https://www.tiktok.com/@kano9x/video/7047708692837436673",
+      "status": "oembed_confirmed",
+      "http": 200
+    },
+    {
+      "handle": "yobinori",
+      "url": "https://www.tiktok.com/@yobinori/video/7700533640303824148",
+      "status": "oembed_confirmed",
+      "http": 200
+    },
+    {
+      "handle": "hirohasu",
+      "url": "https://www.tiktok.com/@hirohasu/video/7679410301485272341",
+      "status": "oembed_confirmed",
+      "http": 200
+    },
+    {
+      "handle": "hikakin",
+      "url": "https://www.tiktok.com/@hikakin/video/6829922167224913154",
+      "status": "oembed_confirmed",
+      "http": 200
+    },
+    {
+      "handle": "nobrocktv_info",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "oreryu_channel",
+      "url": "https://www.tiktok.com/@oreryu_channel/video/7488255204547104001",
+      "status": "oembed_confirmed",
+      "http": 200
+    },
+    {
+      "handle": "makofoods",
+      "url": "https://www.tiktok.com/@makofoods/video/7206682757198515474",
+      "status": "oembed_confirmed",
+      "http": 200
+    },
+    {
+      "handle": "yuriyan.retriever0",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "sugaisan",
+      "url": "https://www.tiktok.com/@sugaisan/video/7708208106093677845",
+      "status": "oembed_confirmed",
+      "http": 200
+    },
+    {
+      "handle": "hondanowing",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "hajimehtk",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "taisukesan0205",
+      "url": "https://www.tiktok.com/@taisukesan0205/video/7302368412628569345",
+      "status": "oembed_confirmed",
+      "http": 200
+    },
+    {
+      "handle": "mr.perfect_makihara",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "chef_hiro",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "_iremaru",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "infoteacherfujiwara",
+      "url": "https://www.tiktok.com/@infoteacherfujiwara/video/7185099733558463745",
+      "status": "oembed_confirmed",
+      "http": 200
+    },
+    {
+      "handle": "sushi.riku",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "shibata_live_",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "vamosookubo",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "kawagoechefdayo",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "gori_garagesale",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "kanayadesu",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "mmkemio",
+      "url": "https://www.tiktok.com/@mmkemio/video/7354293808873442602",
+      "status": "oembed_confirmed",
+      "http": 200
+    },
+    {
+      "handle": "asami_konno",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "ogawanaoya",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "bayashi.tiktok",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "naomiwatanabe",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "morite2",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "fbkfoxhololive",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "marieueda929",
+      "url": "https://www.tiktok.com/@marieueda929/video/7053746511565344002",
+      "status": "oembed_confirmed",
+      "http": 200
+    },
+    {
+      "handle": "nobuhikomatsunaka3",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "hamaitachi",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "sayuri_onan",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "houshoumarine_hololivejp",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "tomomi_kuno",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "rikichannel1203",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "emirin3",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "online.nursing.academy",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "hokutoakira",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "kunoshizuka",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "shugo.fujii",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "yoyoyochan_tiktok",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "kenichiromogi",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "_yoshida_akari",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "miki1imai",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "badass_samurai",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "yoheitsunemi",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "paruru866",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "31575154473",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "takamatsunana",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "makoto_tanabe",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "risaniigaki8",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "terumi6869",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "purinsyogun",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "gengen_36",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "goto_maki923_official",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "deepkvpuy6m",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "naginagio",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "harunakojima22",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "tbs_announcer",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "kojimadayo0716",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "tomo.i_0703",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "morishita.tomoya",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "chekuta",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "ai1988kg",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "emi_morifuji1227",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "ringochan_0626",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "cafeand2ndstage",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "aoki.genta",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "atsushitok",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "anna07294848",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "naokoken.tiktok",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "ii2u2",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "kintalo8",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "sayuringo_officialtiktok",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "sanyuteitom",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "sekiguchiaimi",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "sanyutei_ouraku",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "hinakosakurai",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "ryuraku_chstaff",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "2142076443",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "tensinmukai",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "horimiona10",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "3pei_hayashiya",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "kawagohina3",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "sekine_channel",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "kajiwaragakuto_official",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "bataninmari",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "seikin_official",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "nobu_official",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "oda_nana",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "exit_official",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "usatanipaisen12",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "fuukorin8",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "laughenglish",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "satomitsuharu0217",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "lovemaru7",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "trendkayoko",
+      "status": "missing_video_link"
+    },
+    {
+      "handle": "nakataatsuhiko",
+      "status": "missing_video_link"
+    }
+  ]
+}
