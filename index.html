@@ -911,7 +911,7 @@ html[data-kik="off"] .kik { display: none; }
   </div>
   </div>
 </div>
-<footer class="more">More from the same maker: <a href="https://getkikitori.com" target="_blank" rel="noopener" data-tip="Kikitori: learn Japanese from real videos. Opens in a new tab.">getkikitori.com</a> <a href="https://kikitori.dev" target="_blank" rel="noopener" data-tip="Kikitori developer site. Opens in a new tab.">kikitori.dev</a> <a href="https://okinawahomelab.com" target="_blank" rel="noopener" data-tip="Okinawa Homelab. Opens in a new tab.">okinawahomelab.com</a> <a href="privacy.html" target="_blank" rel="noopener">Privacy and terms</a> <a class="ver" href="https://okinawahomelab.com/kakehashi/" target="_blank" rel="noopener" data-tip="About Kakehashi: what it is and what is new. Opens in a new tab.">Kakehashi v0.3.15</a> <span class="ver whatsnew">New: Undo for ignored channels, and an Ignored channels list in Saved. Starts in Workspace.</span></footer>
+<footer class="more">More from the same maker: <a href="https://getkikitori.com" target="_blank" rel="noopener" data-tip="Kikitori: learn Japanese from real videos. Opens in a new tab.">getkikitori.com</a> <a href="https://kikitori.dev" target="_blank" rel="noopener" data-tip="Kikitori developer site. Opens in a new tab.">kikitori.dev</a> <a href="https://okinawahomelab.com" target="_blank" rel="noopener" data-tip="Okinawa Homelab. Opens in a new tab.">okinawahomelab.com</a> <a href="privacy.html" target="_blank" rel="noopener">Privacy and terms</a> <a class="ver" href="https://okinawahomelab.com/kakehashi/" target="_blank" rel="noopener" data-tip="About Kakehashi: what it is and what is new. Opens in a new tab.">Kakehashi v0.3.16</a> <span class="ver whatsnew">New: CSV export leaves out channels saved from a fresh YouTube search.</span></footer>
 <div id="stg"><button type="button" id="sUp" data-tip="Scroll up one stage: the previous row of results, then the top. Shortcut [.">▲</button><button type="button" id="sDn" data-tip="Scroll down one stage: the next row of results. Shortcut ].">▼</button><button type="button" id="toTop" data-tip="Jump to the top of the page.">Top</button></div>
 <div id="zp" role="group" aria-label="Page zoom" data-state="open">
   <div class="zoom" id="zpAaRow"><button type="button" id="zpAa" aria-label="Show zoom controls" data-tip="Page zoom. Click to open.">Aa</button></div>
@@ -948,7 +948,7 @@ html[data-kik="off"] .kik { display: none; }
   </menu>
 </dialog>
 <dialog id="mine">
-  <p>Channels from a fresh YouTube search are saved only for this browser session.</p>
+  <p>Channels from a fresh YouTube search are saved only until you close this page. Copy CSV and Download CSV leave them out.</p>
   <h2>Saved channels</h2>
   <p id="mineNote">Your saved channels are stored in this browser.</p>
   <ul id="mineList"></ul>
@@ -3043,7 +3043,7 @@ function csvCell(value) {
   return '"' + cell.replace(/"/g, '""') + '"';
 }
 function mineCsv() {
-  return "network,name,link,added\n" + mine.map(m => [m.net, m.name, m.url, m.t].map(csvCell).join(",")).join("\n");
+  return "network,name,link,added\n" + mine.filter(m => !m.transient).map(m => [m.net, m.name, m.url, m.t].map(csvCell).join(",")).join("\n");
 }
 function openMine() {
   closeGuidePlayer();
@@ -3051,7 +3051,7 @@ function openMine() {
   if (!mine.length) { const li = document.createElement("li"); li.textContent = "Nothing saved yet. Preview a creator and choose Save channel."; ul.appendChild(li); }
   mine.forEach((m, i) => {
     const li = document.createElement("li"), sp = document.createElement("span"), a = document.createElement("a"), rm = document.createElement("button");
-    sp.textContent = (m.net === "ig" ? "Instagram · " : "YouTube · ") + m.name;
+    sp.textContent = (m.net === "ig" ? "Instagram · " : "YouTube · ") + m.name + (m.transient ? " · until you close this page, not in CSV" : "");
     a.href = m.url; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Open";
     rm.type = "button"; rm.className = "ghost"; rm.textContent = "Remove";
     rm.addEventListener("click", () => { mine.splice(i, 1); saveMine(); openMine(); });
@@ -3083,7 +3083,7 @@ document.addEventListener("click", (e) => {
 });
 $("mineBtn").addEventListener("click", () => { $("mineBtn").blur(); openMine(); });
 $("mineClose").addEventListener("click", () => $("mine").close());
-$("mineCopy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(mineCsv()); $("mineNote").textContent = "Copied " + mine.length + " channels."; } catch (e) { $("mineNote").textContent = "Copy was blocked. Use Download CSV."; } });
+$("mineCopy").addEventListener("click", async () => { try { const n = mine.filter(m => !m.transient).length; await navigator.clipboard.writeText(mineCsv()); $("mineNote").textContent = "Copied " + n + " channels."; } catch (e) { $("mineNote").textContent = "Copy was blocked. Use Download CSV."; } });
 $("mineSave").addEventListener("click", () => { const l = document.createElement("a"); l.href = URL.createObjectURL(new Blob([mineCsv()], { type: "text/csv" })); l.download = "kakehashi-mine.csv"; l.click(); });
 $("tag").addEventListener("change", () => { tagKey = $("tag").value; renderRankings(); $("tag").focus(); });
 saveMine();
