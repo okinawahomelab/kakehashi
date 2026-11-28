@@ -566,8 +566,11 @@ html[data-kik="off"] .kik { display: none; }
   [data-theme="vermilion-dark"] .guide-options { color: var(--fg); }
   .guide-options .tools { flex-wrap: wrap; max-width: min(340px, 80vw); }
   .guide-options .tools button { width: auto; padding-inline: 8px; white-space: nowrap; }
-  #themeToast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 90; width: max-content; max-width: 92vw; padding: 9px 14px; border-radius: 8px; background: var(--teal); color: var(--on-teal); font-size: 14px; pointer-events: none; opacity: 0; transition: opacity .2s; }
-  #themeToast.on { opacity: 1; }
+  #themeToast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 90; width: max-content; max-width: 92vw; padding: 9px 14px; border-radius: 8px; background: var(--teal); color: var(--on-teal); font-size: 14px; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity .2s, visibility .2s; }
+  #themeToast.on { opacity: 1; visibility: visible; }
+  #guidePlayer:modal > #themeToast { top: 12px; bottom: auto; }
+  #themeToast.on.undo { pointer-events: auto; display: flex; gap: 12px; align-items: center; }
+  #themeToast button { flex: none; width: auto; white-space: nowrap; padding: 4px 12px; border-radius: 6px; border: 1px solid currentColor; background: transparent; color: inherit; font: inherit; cursor: pointer; }
   .rank-summary, .rank-meta, .rank-video-actions { display: contents; }
   .rank-empty, .rank-watch { display: none; }
 
@@ -908,7 +911,7 @@ html[data-kik="off"] .kik { display: none; }
   </div>
   </div>
 </div>
-<footer class="more">More from the same maker: <a href="https://getkikitori.com" target="_blank" rel="noopener" data-tip="Kikitori: learn Japanese from real videos. Opens in a new tab.">getkikitori.com</a> <a href="https://kikitori.dev" target="_blank" rel="noopener" data-tip="Kikitori developer site. Opens in a new tab.">kikitori.dev</a> <a href="https://okinawahomelab.com" target="_blank" rel="noopener" data-tip="Okinawa Homelab. Opens in a new tab.">okinawahomelab.com</a> <a href="privacy.html" target="_blank" rel="noopener">Privacy and terms</a> <a class="ver" href="https://okinawahomelab.com/kakehashi/" target="_blank" rel="noopener" data-tip="About Kakehashi: what it is and what is new. Opens in a new tab.">Kakehashi v0.3.14</a> <span class="ver whatsnew">New: BlueLight theme and a Theme button. Page opens at 70% zoom.</span></footer>
+<footer class="more">More from the same maker: <a href="https://getkikitori.com" target="_blank" rel="noopener" data-tip="Kikitori: learn Japanese from real videos. Opens in a new tab.">getkikitori.com</a> <a href="https://kikitori.dev" target="_blank" rel="noopener" data-tip="Kikitori developer site. Opens in a new tab.">kikitori.dev</a> <a href="https://okinawahomelab.com" target="_blank" rel="noopener" data-tip="Okinawa Homelab. Opens in a new tab.">okinawahomelab.com</a> <a href="privacy.html" target="_blank" rel="noopener">Privacy and terms</a> <a class="ver" href="https://okinawahomelab.com/kakehashi/" target="_blank" rel="noopener" data-tip="About Kakehashi: what it is and what is new. Opens in a new tab.">Kakehashi v0.3.15</a> <span class="ver whatsnew">New: Undo for ignored channels, and an Ignored channels list in Saved. Starts in Workspace.</span></footer>
 <div id="stg"><button type="button" id="sUp" data-tip="Scroll up one stage: the previous row of results, then the top. Shortcut [.">▲</button><button type="button" id="sDn" data-tip="Scroll down one stage: the next row of results. Shortcut ].">▼</button><button type="button" id="toTop" data-tip="Jump to the top of the page.">Top</button></div>
 <div id="zp" role="group" aria-label="Page zoom" data-state="open">
   <div class="zoom" id="zpAaRow"><button type="button" id="zpAa" aria-label="Show zoom controls" data-tip="Page zoom. Click to open.">Aa</button></div>
@@ -949,7 +952,8 @@ html[data-kik="off"] .kik { display: none; }
   <h2>Saved channels</h2>
   <p id="mineNote">Your saved channels are stored in this browser.</p>
   <ul id="mineList"></ul>
-  <h2 id="ignHead" hidden>Ignored channels</h2>
+  <h2 id="ignHead">Ignored channels (0)</h2>
+  <p id="ignNote">Nothing ignored. Ignore this channel hides a channel and lists it here, so you can restore it.</p>
   <ul id="ignList"></ul>
   <menu>
     <button type="button" class="ghost" id="mineClose">Close</button>
@@ -980,7 +984,8 @@ html[data-kik="off"] .kik { display: none; }
   <section class="hg"><h3>Move around</h3><ul>
     <li class="sc"><span class="keys"><kbd>[</kbd><kbd>]</kbd></span><span class="d">[ and ] scroll up and down one stage at a time, to the previous or next row of results. The ▲ ▼ buttons do the same. Esc closes a Top 100 preview.</span></li>
     <li class="sc"><span class="keys"><kbd>N</kbd></span><span class="d">N opens the next channel from Add all. You still tap Follow on Instagram.</span></li>
-    <li class="sc"><span class="keys"><kbd>M</kbd></span><span class="d">M opens Saved, with CSV export.</span></li>
+    <li class="sc"><span class="keys"><kbd>M</kbd></span><span class="d">M opens Saved and Ignored channels, with CSV export.</span></li>
+    <li class="sc"><span class="keys"><kbd>Z</kbd></span><span class="d">Z undoes ignoring a channel while the Undo message shows.</span></li>
     <li class="sc"><span class="keys"><kbd>U</kbd></span><span class="d">U hard refresh: reloads the page from the server, skipping the browser's saved copy.</span></li>
     <li class="sc"><span class="keys"><kbd>?</kbd></span><span class="d">? opens this list. Escape closes it.</span></li>
   </ul></section>
@@ -2582,7 +2587,7 @@ function card(a, via, net) {
   ign.type = "button";
   ign.className = "ghost ign";
   ign.textContent = "Ignore this channel";
-  ign.dataset.tip = "Hide this channel from every list. Undo it in Saved (shortcut M).";
+  ign.dataset.tip = "Hide this channel. Undo with Z, or restore it later in Saved (shortcut M).";
   ign.addEventListener("click", () => ignoreCreator(a));
   row.append(ign);
   el.append(stage, row);
@@ -3053,14 +3058,16 @@ function openMine() {
     li.append(sp, a, rm); ul.appendChild(li);
   });
   const ig = $("ignList"); ig.replaceChildren();
-  $("ignHead").hidden = !ignored.length;
+  $("ignHead").textContent = "Ignored channels (" + ignored.length + ")";
+  $("ignNote").textContent = ignored.length ? "Restore brings a channel back to the lists." : "Nothing ignored. Ignore this channel hides a channel and lists it here, so you can restore it.";
   ignored.forEach((x, i) => {
     const li = document.createElement("li"), sp = document.createElement("span"), rm = document.createElement("button");
-    sp.textContent = x[1] || x[0];
+    sp.textContent = (x[1] || x[0]) + (x[2] ? " · until you close this page" : "");
     rm.type = "button"; rm.className = "ghost"; rm.textContent = "Restore";
     rm.addEventListener("click", () => { ignored.splice(i, 1); saveIgnored(); render(columnsOn); openMine(); });
     li.append(sp, rm); ig.appendChild(li);
   });
+  $("themeToast").classList.remove("on"); // its Undo would be out of date after a Restore
   if (!$("mine").open) $("mine").showModal();
 }
 document.addEventListener("click", (e) => {
@@ -3236,11 +3243,18 @@ function ignoreCreator(creator) {
   const group = playerTrigger?.closest(".guide-grid");
   const source = playerTrigger?.closest("#fresh, #list")?.id || "list";
   const index = group ? [...group.querySelectorAll(".guide-thumbnail")].indexOf(playerTrigger) : 0;
-  ignored.push([creator.handle || creator.channelId, creator.name, creator.fresh ? creator.apiFetchedAt : 0]);
+  const entry = [creator.handle || creator.channelId, creator.name, creator.fresh ? creator.apiFetchedAt : 0];
+  ignored.push(entry);
   saveIgnored();
+  const announce = () => showToast("Ignored " + (entry[1] || entry[0]) + ". Restore it any time under Saved.", () => {
+    const at = ignored.indexOf(entry);
+    if (at < 0) return;
+    ignored.splice(at, 1); saveIgnored(); render(columnsOn);
+  });
   if (columnsOn) {
     render(true);
-    $("q").focus({ preventScroll: true });
+    announce();
+    $("themeToast").querySelector("button").focus({ preventScroll: true });
     return;
   }
   render();
@@ -3250,9 +3264,11 @@ function ignoreCreator(creator) {
     || document.querySelector("#left .guide-thumbnail");
   if (next) {
     next.click();
+    announce();
   } else {
     closeGuidePlayer();
-    $("q").focus({ preventScroll: true });
+    announce();
+    $("themeToast").querySelector("button").focus({ preventScroll: true });
   }
 }
 
@@ -3345,7 +3361,10 @@ function openCreator(a, trigger, initialPlatform) {
   show(platform);
   if (!guidePlayer.open) {
     if (guideDesktop.matches) guidePlayer.show();
-    else guidePlayer.showModal();
+    else {
+      guidePlayer.showModal();
+      if ($("themeToast").classList.contains("on")) guidePlayer.prepend($("themeToast"));
+    }
   }
   if (initialPlatform) preview.querySelector(".poster")?.click();
   $("closeGuidePlayer").focus({ preventScroll: true });
@@ -3811,10 +3830,31 @@ function setTheme(name) {
   document.documentElement.dataset.theme = name;
   try { localStorage.setItem("ig-starter-theme", name); } catch (e) {}
   paintTheme();
-  const choice = themeChoices.find(b => b.dataset.themeChoice === name), toast = $("themeToast");
-  toast.textContent = "Theme: " + (choice.getAttribute("aria-label") || choice.textContent);
-  toast.classList.add("on"); clearTimeout(toast.timer); toast.timer = setTimeout(() => toast.classList.remove("on"), 2200);
+  const choice = themeChoices.find(b => b.dataset.themeChoice === name);
+  showToast("Theme: " + (choice.getAttribute("aria-label") || choice.textContent));
 }
+function showToast(text, undo) {
+  const toast = $("themeToast"), player = $("guidePlayer");
+  // A modal player blocks everything outside it, so the message has to live inside it.
+  (player.matches(":modal") ? player : document.body).prepend(toast);
+  toast.textContent = text;
+  toast.classList.toggle("undo", !!undo);
+  if (undo) {
+    const button = document.createElement("button");
+    button.type = "button"; button.textContent = "Undo";
+    button.addEventListener("click", () => { toast.classList.remove("on"); undo(); });
+    toast.append(button);
+  }
+  toast.classList.add("on");
+  clearTimeout(toast.timer);
+  // When time is up, stay while the pointer or focus is still on it, and look again shortly.
+  const expire = () => {
+    if (toast.matches(":hover, :focus-within")) toast.timer = setTimeout(expire, 2000);
+    else toast.classList.remove("on");
+  };
+  toast.timer = setTimeout(expire, undo ? 8000 : 2200);
+}
+$("guidePlayer").addEventListener("close", () => { if (!$("guidePlayer").open && $("themeToast").parentNode !== document.body) document.body.prepend($("themeToast")); });
 themeChoices.forEach(button => button.addEventListener("click", () => setTheme(button.dataset.themeChoice)));
 function cycleTheme() {
   const index = themeChoices.findIndex(button => button.getAttribute("aria-pressed") === "true");
@@ -3853,6 +3893,10 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") e.target.blur();
     if (e.key === "Enter" && e.target.id === "q") { e.preventDefault(); runSearch(queryText(), queryText()); }
     return;
+  }
+  if ((e.key === "z" || e.key === "Z") && !e.metaKey && !e.ctrlKey && [...document.querySelectorAll("dialog:modal")].every((d) => d.id === "guidePlayer")) {
+    const undo = $("themeToast").classList.contains("on") && $("themeToast").querySelector("button");
+    if (undo) { e.preventDefault(); undo.click(); return; }
   }
   if (document.querySelector("dialog:modal")) return;
   if (e.key === "t" || e.key === "T") {
