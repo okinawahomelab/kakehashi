@@ -10,7 +10,7 @@
   var saved = "", vids = "", found = "";
   try {
     saved = localStorage.getItem("ig-starter-theme") || "";
-    if (localStorage.getItem("ig-starter-layout") !== "guide") document.documentElement.dataset.layout = "columns";
+    if (localStorage.getItem("ig-starter-default-view") === "columns") document.documentElement.dataset.layout = "columns";
     vids = localStorage.getItem("ig-starter-videos2") || "";
     found = localStorage.getItem("ig-starter-found2") || "";
   } catch (e) {}
@@ -311,12 +311,28 @@ html[data-kik="off"] .kik { display: none; }
   .guide-settings summary { cursor: pointer; font-size: 14px; font-weight: 650; }
   .guide-options { position: absolute; right: 0; top: 125%; width: max-content; max-width: min(315px, 90vw); display: flex; flex-wrap: wrap; gap: 6px; padding: 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); box-shadow: 0 10px 28px #17153825; }
   .guide-options .tools, .guide-options .zoom { display: flex; gap: 4px; }
+  .guide-options .actions { flex-basis: 100%; margin: 0; }
+  .guide-options .zoom { flex-wrap: wrap; }
+  .guide-options :is(input, select) { max-width: 100%; min-width: 0; }
+  .guide-options > * { min-width: 0; max-width: 100%; }
+  /* short windows or high zoom: the panel scrolls instead of running off-screen */
+  .guide-options { max-height: max(3rem, calc(100dvh / var(--page-zoom, 1) - 130px)); overflow-y: auto; overscroll-behavior: contain; align-content: flex-start; max-width: min(315px, calc(90vw / var(--page-zoom, 1))); }
+  .guide-options .tools { min-width: 0; }
+  .guide-options button { max-width: 100%; height: auto; min-height: 36px; white-space: normal !important; } /* long labels wrap inside their outline */
+  .guide-options .zoom button, .guide-options .tools button { min-height: 32px; }
+  body:has(.guide-settings[open]) :is(#zp, #stg) { visibility: hidden; } /* floating buttons would cover the open panel */
+  .guide-options summary:hover { color: var(--fg) !important; } /* beats the per-theme header hover colour */
   .api-key-help { width: 100%; font-size: 13px; color: var(--mute); }
   .api-key-help summary { cursor: pointer; font-weight: 650; }
   .api-key-help ol { padding-left: 20px; margin: 8px 0; }
   .api-key-help li { margin: 4px 0; }
   .api-key-help p { margin: 8px 0 0; }
-  .settings-layout { display: flex; align-items: center; gap: 8px; flex-basis: 100%; font-size: 14px; }
+  .settings-layout { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; flex-basis: 100%; font-size: 14px; }
+  #saveView { width: auto; }
+  #saveViewNote { flex-basis: 100%; color: var(--fg); }
+  /* Settings controls stay fully readable; the dimmed default was too faint here */
+  .guide-options :is(.ghost, .tools button, .zoom button) { opacity: 1; color: var(--fg); border-color: var(--mute); }
+  .guide-options .tools button[aria-pressed="true"] { border-color: var(--amber); box-shadow: inset 0 0 0 1px var(--amber); }
   #layoutChoice { height: 36px; padding: 0 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--fg); font: inherit; }
   #themeNotes, #themeBlue { width: auto; padding-inline: 10px; white-space: nowrap; }
   .guide-options [aria-label="Theme"] { flex-wrap: wrap; }
@@ -796,12 +812,14 @@ html[data-kik="off"] .kik { display: none; }
         <option value="guide">Channel Guide</option>
         <option value="columns">Workspace</option>
       </select>
+      <button type="button" class="ghost" id="saveView" data-tip="Open the view you are on now (Discover, Top 100 or Workspace) every time you come back, in this browser. Shortcut D.">Make this view my default</button>
+      <small id="saveViewNote" role="status"></small>
     </div>
     <div class="settings-layout" id="personalKeySettings" style="flex-wrap:wrap">
       <label for="youtubeApiKey">Your YouTube API key</label>
       <input id="youtubeApiKey" type="password" autocomplete="off" spellcheck="false" placeholder="Optional API key">
-      <button type="button" id="saveYoutubeApiKey">Save key</button>
-      <button type="button" id="clearYoutubeApiKey">Remove key</button>
+      <button type="button" class="ghost" id="saveYoutubeApiKey">Save key</button>
+      <button type="button" class="ghost" id="clearYoutubeApiKey">Remove key</button>
       <small id="youtubeApiKeyStatus" role="status">Stored in this browser and sent directly to Google for YouTube search. Restrict the key to YouTube Data API and this website in Google Cloud. Your key uses your own Google quota.</small>
       <details class="api-key-help">
         <summary>How to set up your own YouTube API key</summary>
@@ -823,13 +841,13 @@ html[data-kik="off"] .kik { display: none; }
       <button type="button" id="helpbtn" aria-label="Keyboard shortcuts" data-tip="Show the keyboard shortcuts. Press ? from anywhere.">?</button>
     </div>
     <button type="button" class="ghost" id="shorts" aria-pressed="false" data-tip="Switch what YouTube cards and Top 100 previews play: latest videos or videos under four minutes. Shortcut H.">YouTube plays: Latest videos</button>
-  </div>
   <div class="actions">
     <button type="button" class="go" data-add-all data-tip="Asks first, then opens every channel on screen, one at a time. It cannot tap Follow for you.">Add all</button>
-    <button type="button" class="ghost" id="hard" data-tip="Reload this page from the server, skipping the saved copy in your browser. Your settings and lists are kept. Shortcut U.">Hard refresh</button>
+    <button type="button" class="ghost" id="hard" data-tip="Reload this page from the server, skipping the saved copy in your browser. Settings and lists saved in this browser are kept; fresh YouTube search results are not. The page opens in your default view. Shortcut U.">Hard refresh</button>
     <button type="button" class="ghost" id="kikT" aria-pressed="true" data-tip="Show or hide the Kikitori button on YouTube cards. That button copies the video link and opens Kikitori so you can add it. Shortcut J.">Kikitori button: on</button>
     <button type="button" class="ghost" id="coachToggle" data-tip="Show or hide the step reminder. Shortcut C.">Hide steps</button>
-    </div></details>
+    </div>
+  </div></details>
   </header>
   <p class="guide-tagline"><span lang="ja">架け橋</span> · A bridge between the Japanese you enjoy and the Japanese you study.</p>
   <section id="cloudPanel" aria-labelledby="guide-title">
@@ -911,7 +929,7 @@ html[data-kik="off"] .kik { display: none; }
   </div>
   </div>
 </div>
-<footer class="more">More from the same maker: <a href="https://getkikitori.com" target="_blank" rel="noopener" data-tip="Kikitori: learn Japanese from real videos. Opens in a new tab.">getkikitori.com</a> <a href="https://kikitori.dev" target="_blank" rel="noopener" data-tip="Kikitori developer site. Opens in a new tab.">kikitori.dev</a> <a href="https://okinawahomelab.com" target="_blank" rel="noopener" data-tip="Okinawa Homelab. Opens in a new tab.">okinawahomelab.com</a> <a href="privacy.html" target="_blank" rel="noopener">Privacy and terms</a> <a class="ver" href="https://okinawahomelab.com/kakehashi/" target="_blank" rel="noopener" data-tip="About Kakehashi: what it is and what is new. Opens in a new tab.">Kakehashi v0.3.16</a> <span class="ver whatsnew">New: CSV export leaves out channels saved from a fresh YouTube search.</span></footer>
+<footer class="more">More from the same maker: <a href="https://getkikitori.com" target="_blank" rel="noopener" data-tip="Kikitori: learn Japanese from real videos. Opens in a new tab.">getkikitori.com</a> <a href="https://kikitori.dev" target="_blank" rel="noopener" data-tip="Kikitori developer site. Opens in a new tab.">kikitori.dev</a> <a href="https://okinawahomelab.com" target="_blank" rel="noopener" data-tip="Okinawa Homelab. Opens in a new tab.">okinawahomelab.com</a> <a href="privacy.html" target="_blank" rel="noopener">Privacy and terms</a> <a class="ver" href="https://okinawahomelab.com/kakehashi/" target="_blank" rel="noopener" data-tip="About Kakehashi: what it is and what is new. Opens in a new tab.">Kakehashi v0.3.17</a> <span class="ver whatsnew">New: starts in Discover again, you can pick your own default view in Settings, and Settings buttons are easier to read.</span></footer>
 <div id="stg"><button type="button" id="sUp" data-tip="Scroll up one stage: the previous row of results, then the top. Shortcut [.">▲</button><button type="button" id="sDn" data-tip="Scroll down one stage: the next row of results. Shortcut ].">▼</button><button type="button" id="toTop" data-tip="Jump to the top of the page.">Top</button></div>
 <div id="zp" role="group" aria-label="Page zoom" data-state="open">
   <div class="zoom" id="zpAaRow"><button type="button" id="zpAa" aria-label="Show zoom controls" data-tip="Page zoom. Click to open.">Aa</button></div>
@@ -970,6 +988,7 @@ html[data-kik="off"] .kik { display: none; }
     <li class="sc"><span class="keys"><kbd>R</kbd></span><span class="d">R switches between Discover and Top 100, or opens rankings in Workspace.</span></li>
     <li class="sc"><span class="keys"><kbd>1</kbd><kbd>2</kbd></span><span class="d">In desktop Workspace, 1 and 2 show or hide the Instagram and YouTube columns.</span></li>
     <li class="sc"><span class="keys"><kbd>L</kbd><kbd>W</kbd></span><span class="d">In desktop Workspace, L moves the rankings and W changes their width.</span></li>
+    <li class="sc"><span class="keys"><kbd>D</kbd></span><span class="d">D makes the view you are on your default. The same button is in Settings.</span></li>
     <li class="sc"><span class="keys"><kbd>C</kbd></span><span class="d">C shows or hides the step reminder.</span></li>
     <li class="sc"><span class="keys"><kbd>J</kbd></span><span class="d">J shows or hides the Kikitori button on YouTube cards.</span></li>
   </ul></section>
@@ -2859,7 +2878,6 @@ function setView(columns, rankings = false) {
     delete document.documentElement.dataset.layout;
     workspaceIgVisibility?.disconnect();
   }
-  try { localStorage.setItem("ig-starter-layout", columns ? "columns" : "guide"); } catch (e) {}
   render(columns);
 }
 let tagKey = "", mine = [];
@@ -3591,6 +3609,7 @@ function render(rankingsChanged = false) {
   $("workspaceControls").hidden = !columnsOn;
   $("guide-title").textContent = columnsOn ? "Channel workspace" : "Find your kind of Japanese.";
   $("cloudPanel").hidden = topOn;
+  paintQueue();
   $("coach").hidden = topOn || !coachOn;
   placeRankings();
   if (columnsOn) {
@@ -3632,6 +3651,20 @@ $("discoverTikTok").addEventListener("click", () => {
   showRankNetwork("tt");
   if (!columnsOn) $("top").focus();
 });
+const viewNames = { discover: "Discover", top: "Top 100", columns: "Workspace" };
+let defaultView = "discover";
+try { const v = localStorage.getItem("ig-starter-default-view"); if (Object.hasOwn(viewNames, v)) defaultView = v; } catch (e) {}
+function paintDefaultView() { $("saveViewNote").textContent = "Opens in: " + viewNames[defaultView]; }
+function saveDefaultView() {
+  const view = columnsOn ? "columns" : topOn ? "top" : "discover";
+  let message = viewNames[view] + " is now your default view.";
+  try { localStorage.setItem("ig-starter-default-view", view); defaultView = view; paintDefaultView(); }
+  catch (e) { message = $("saveViewNote").textContent = "This browser blocked saving your default view."; }
+  const t = $("themeToast"); // keep a showing Undo; the note in Settings still updates
+  if (!(t.classList.contains("on") && t.querySelector("button"))) showToast(message);
+}
+$("saveView").addEventListener("click", saveDefaultView);
+paintDefaultView();
 const guideSettings = document.querySelector(".guide-settings");
 document.addEventListener("click", (event) => {
   if (guideSettings.open && !guideSettings.contains(event.target)) guideSettings.open = false;
@@ -3656,6 +3689,8 @@ function openQueued() {
 }
 function paintQueue() {
   for (const button of document.querySelectorAll("[data-add-all]")) {
+    // Add all acts on the Discover/Workspace lists, which Top 100 hides; a running batch keeps its Next button
+    button.hidden = topOn && !(queue && queue.length);
     button.textContent = queue && queue.length ? "Next (" + queue.length + " left)" : "Add all";
     button.dataset.tip = queue && queue.length ? "Opens the next channel on Instagram. The browser allows one new tab per tap, so tap this (or press N) for each." : "Asks first, then opens every channel on screen, one at a time. It cannot tap Follow for you.";
   }
@@ -3905,6 +3940,7 @@ document.addEventListener("keydown", (e) => {
   }
   if (e.key === "s" || e.key === "S") { e.preventDefault(); const o = ["topic","az","za"]; setSort(o[(o.indexOf(sortKey)+1)%o.length]); }
   if (e.key === "m" || e.key === "M") { e.preventDefault(); openMine(); }
+  if ((e.key === "d" || e.key === "D") && !e.metaKey && !e.ctrlKey && !e.altKey) { e.preventDefault(); saveDefaultView(); }
   if ((e.key === "g" || e.key === "G") && (topOn || columnsOn)) { e.preventDefault(); const o = [...$("tag").options].map((x) => x.value); tagKey = o[(o.indexOf(tagKey) + 1) % o.length]; renderRankings(); }
   if (e.key === "r" || e.key === "R") {
     e.preventDefault();
@@ -3930,7 +3966,7 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "n" || e.key === "N") {
     e.preventDefault();
     if (queue && queue.length) openQueued();
-    else $("status").textContent = "Nothing queued. Tap Add on a card, or use Add all.";
+    else $("status").textContent = topOn ? "Nothing queued. Add all is in Discover and Workspace." : "Nothing queued. Tap Add on a card, or use Add all.";
   }
   if (e.key === "/") { e.preventDefault(); $("q").focus(); }
   if (e.key === "-" || e.key === "_") { e.preventDefault(); applyZoom(zoom - 0.1, true); }
@@ -3962,6 +3998,7 @@ document.addEventListener("mouseout", (e) => {
   if (e.target.closest && e.target.closest("[data-tip]")) tipTimer = setTimeout(() => tip.classList.remove("on"), 200);
 });
 render();
+if (defaultView === "top") setTop(true);
 applyZoom(0.7, true); // default zoom 70%; Fit or key 0 still fits the width
 try { if (localStorage.getItem("kakehashi-zoompill-v1") === "min") zpSet(true); } catch (e) {}
 $("zpOut").addEventListener("click", () => { $("zpOut").blur(); applyZoom(zoom - 0.1, true); });

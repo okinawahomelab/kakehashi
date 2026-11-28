@@ -5,8 +5,9 @@ immerse in: search by interest, preview videos in place, browse a ranked
 Top 100 per network, and add or subscribe in one click.
 
 Open Settings to choose the Channel Guide or Workspace layout and a color
-theme. New browsers start in Journal Light with the Workspace layout. Layout and color choices
-are saved separately in the browser.
+theme. New browsers start in Journal Light in the Discover view. To start somewhere else,
+open that view and choose "Make this view my default" in Settings (or press D). Your default
+view and color choice are saved separately in the browser.
 
 - `index.html`: the whole page (vanilla JS, no build step).
 - `functions/search.js`: a Cloudflare Pages Function that serves `/search`

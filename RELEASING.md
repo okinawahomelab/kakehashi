@@ -5,7 +5,7 @@
 - Have someone other than the author review the change, including security,
   privacy and third-party data.
 - Check desktop and mobile browsers: a new browser starts in Journal Light
-  with the Workspace layout, choices of layout and theme survive reload, and the changed features work.
+  in the Discover view, the theme and saved default view survive reload, and the changed features work.
 - Scan for secrets.
 
 ## Publishing the source
